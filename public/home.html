@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mock Server</title>
+  </head>
+  <body>
+    <h1>Mock Server</h1>
+  </body>
+</html>
+<script>
+  //http://localhost:5000/api/users
+
+  async function get() {
+    var data = await fetch("http://localhost:5000/api/users");
+    // var data = await fetch("http://localhost:5000/api/users/1");
+    // var data = await fetch(
+    //   "http://localhost:5000/api/users?_sort=age&_order=desc"
+    // );
+    //var data = await fetch("http://localhost:5000/api/users?age_gte=10");
+    data = await data.json();
+    console.log(data);
+  }
+  get();
+
+  async function post() {
+    var data = await fetch("http://localhost:5000/api/products", {
+      method: "POST",
+      body: JSON.stringify({
+        id: 11,
+        name: "Chocolate",
+        price: 6,
+        active: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+  post();
+
+  async function put() {
+    var data = await fetch("http://localhost:5000/api/products/11", {
+      method: "PUT",
+      body: JSON.stringify({
+        id: 11,
+        name: "Choco-latty",
+        price: 6.5,
+        active: true,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+  put();
+
+  async function del() {
+    var data = await fetch("http://localhost:5000/api/products/9", {
+      method: "DELETE",
+    });
+  }
+  del();
+</script>
